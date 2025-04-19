@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mini Voting System</title>
+</head>
+<body>
+    <h1>Vote Now!</h1>
+    <form action="/vote" method="post">
+        <input type="radio" name="candidate" value="1"> Candidate 1<br>
+        <input type="radio" name="candidate" value="2"> Candidate 2<br>
+        <input type="radio" name="candidate" value="3"> Candidate 3<br>
+        <button type="submit">Vote</button>
+    </form>
+    
+</body>
+</html>

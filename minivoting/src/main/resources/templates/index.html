@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Voting System</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Mini Voting System by shubham</h1>
+
+        <!-- ✅ Success Message (vote hone ke baad) -->
+        <div th:if="${message}" class="success-message">
+            <p th:text="${message}"></p>
+        </div>
+
+        <!-- Add Candidate Form -->
+        <form action="/add" method="post">
+            <input type="text" name="name" placeholder="Candidate name" required>
+            <button type="submit">Add Candidate</button>
+        </form>
+
+        <h2>Vote Now</h2>
+
+        <!-- Vote Buttons -->
+        <form action="/vote" method="post" th:each="candidate, iterStat : ${candidates}">
+            <button type="submit" name="index" th:value="${iterStat.index}" 
+                th:text="'Vote for ' + ${candidate.name}">
+            </button>
+        </form>
+
+        <form action="/reset-candidates" method="post" onsubmit="return handleResetConfirm(this)">
+            <!-- Hidden input field with default value as false -->
+            <input type="hidden" name="confirmReset" value="false" id="confirmReset" />
+        
+            <button type="submit"
+                style="background-color: red; color: white; padding: 8px 16px; border: none; border-radius: 4px;">
+                🔄 Reset All Candidates
+            </button>
+        </form>
+        
+        
+        <script>
+            function handleResetConfirm(form) {
+                // Check if user confirms reset action
+                if (confirm("Are you sure you want to reset all candidates?")) {
+                    // Set confirmReset hidden field value to 'true' if confirmed
+                    document.getElementById("confirmReset").value = "true";
+                    return true; // Allow form submission
+                }
+                return false; // Prevent form submission if cancelled
+            }
+        </script>
+        
+        
+        
+        <br>
+        <p style="color: black;">Total Votes: <span th:text="${totalVotes}"></span></p>
+        <a href="/result">See Results</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,4 @@
+com\votingapp\minivoting\controller\VotingController.class
+com\votingapp\minivoting\model\Candidate.class
+com\votingapp\minivoting\service\VotingService.class
+com\votingapp\minivoting\MinivotingApplication.class
